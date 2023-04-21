@@ -6,8 +6,6 @@ import customerController from "../controllers/Api/customerController";
 import warehouseController from "../controllers/Api/warehouseController";
 import employeeTypeCotroller from "../controllers/Api/employeeTypeController";
 import employeeController from "../controllers/Api/employeeController";
-import vehicalController from "../controllers/Api/vehicalController";
-import containerController from "../controllers/Api/containerController";
 //middleware
 import middleware from "../middlewares/middleware";
 
@@ -45,7 +43,7 @@ const initialApiRouter = (app) => {
   router.get('/employee', employeeController.getAllEmployees);
   router.get('/employee:id', employeeController.getEmployee);
   router.put('/employee:id', employeeController.updateEmployee);
-  router.delete('/employee:id', employeeController.deleteEmployee);
+  router.delete('/employee-type:id', employeeController.deleteEmployee);
 
 
   //warehouse
@@ -57,20 +55,7 @@ const initialApiRouter = (app) => {
   router.delete('/warehouse:id', middleware.verifyTokenAndAdmin, warehouseController.deleteWarehouse);
   router.post("/warehouse", middleware.verifyTokenAndAdmin , warehouseController.createWarehouse);
 
-  //vehical 
-  router.post('/vehical', vehicalController.createVehical);
-  router.get('/vehical', vehicalController.getAllVehicals);
-  router.get('/vehical:id', vehicalController.getVehical);
-  router.put('/vehical:id', vehicalController.updateVehical);
-  router.delete('/vehical:id', vehicalController.deleteVehical);
-
-  //container
-  router.post('/container', containerController.createContainer);
-  router.get('/container', containerController.getAllContainers);
-  router.get('/container:id', containerController.getContainer);
-  router.put('/container:id', containerController.updateContainer);
-  router.delete('/container:id', containerController.deleteContainer);
-
+  //
 
   return app.use("/api", router);
 };

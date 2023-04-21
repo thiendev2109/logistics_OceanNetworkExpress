@@ -67,9 +67,9 @@ const initialApiRouter = (app) => {
   //container
   router.post('/container', containerController.createContainer);
   router.get('/container', containerController.getAllContainers);
-  router.get('/container:id', containerController.getContainer);
-  router.put('/container:id', containerController.updateContainer);
-  router.delete('/container:id', containerController.deleteContainer);
+  router.get('/employee:id', containerController.getContainer);
+  router.put('/employee:id', containerController.updateContainer);
+  router.delete('/employee:id', containerController.deleteContainer);
 
 
   return app.use("/api", router);
