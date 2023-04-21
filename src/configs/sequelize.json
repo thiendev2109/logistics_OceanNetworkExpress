@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "sa",
+    "password": "12345",
+    "database": "Logi_OceanNetworkExpress",
+    "host": "SITHIEN",
+    "dialect": "mssql"
+  },
+  "test": {
+    "username": "sa",
+    "password": "12345",
+    "database": "Logi_OceanNetworkExpress",
+    "host": "SITHIEN",
+    "dialect": "mssql"
+  },
+  "production": {
+    "username": "sa",
+    "password": "12345",
+    "database": "Logi_OceanNetworkExpress",
+    "host": "SITHIEN",
+    "dialect": "mssql"
+  }
+}

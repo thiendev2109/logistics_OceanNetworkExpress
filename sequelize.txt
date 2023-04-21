@@ -1,0 +1,16 @@
+npx sequelize-cli model:generate --name Warehouse --attributes id_warehouse:string,warehouseName:string,location:string,email:string,phone:string,capacity:integer,country:string,address:string,zipcode:integer
+npx sequelize-cli model:generate --name Admin --attributes id_admin:string,adminName:string,adminSystem:boolean,email:string,phone:string,password:string,id_warehouse:string
+
+npx sequelize-cli model:generate --name Customer --attributes id_customer:string,firstname:string,lastname:string,email:string,phone:string,city:string,country:string,address:string,password:string,company:string,birthday:date,sex:boolean
+
+
+npx sequelize-cli model:generate --name EmployeeType --attributes id_employeeType:string,employeeTypeName:string
+npx sequelize-cli model:generate --name Employees --attributes id_employee:string,firstname:string,lastname:string,email:string,phone:string,city:string,country:string,address:string,cardIndentify:string,birthday:date,sex:boolean,id_warehouse:string,id_employee_type:string
+
+npx sequelize-cli model:generate --name Containers --attributes id_container:string,containerPosition:string,size:string,id_warehouse:string
+npx sequelize-cli model:generate --name Vehicals --attributes id_vehical:string,licensePlate:string,vehicalLocation:string,id_warehouse:string
+
+npx sequelize-cli model:generate --name Services --attributes id_service:string,serviceName:string,price:double
+npx sequelize-cli model:generate --name MerchandiseType --attributes id_merchandiseType:string,merchandiseTypeName:string,price:double
+
+npx sequelize-cli model:generate --name Booking --attributes id_booking:string,id_warehouse:string,id_customer:string,id_service:string,id_merchandiseType:string,origin:string,destination:string,requestDepartureDate:date,requestArrivelDate:date,status:integer,bookingNote:string,volumn1PCS:string,totalWeight:float
