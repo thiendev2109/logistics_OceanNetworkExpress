@@ -97,6 +97,11 @@ const initialApiRouter = (app) => {
   router.put('/booking/:id', bookingController.updateBooking);
   router.delete('/booking/:id', bookingController.deleteBooking);
 
+
+  router.put('/booking-to-status/:id', bookingController.bookingToStatus);
+  router.post('booking-to-shipping', bookingController.bookingToShipping);
+  router.post('booking-to-payment', bookingController.bookingToPayment);
+
   return app.use("/api", router);
 };
 
