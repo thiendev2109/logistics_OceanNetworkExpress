@@ -10,6 +10,7 @@ import vehicalController from "../controllers/Api/vehicalController";
 import containerController from "../controllers/Api/containerController";
 import serviceController from "../controllers/Api/serviceController";
 import merchandiseTypeController from "../controllers/Api/merchandiseTypeController";
+import bookingController from "../controllers/Api/bookingController";
 //middleware
 import middleware from "../middlewares/middleware";
 
@@ -88,6 +89,12 @@ const initialApiRouter = (app) => {
   router.get('/merchandise-type:id', merchandiseTypeController.getMerchandiseType);
   router.put('/merchandise-type/:id', merchandiseTypeController.updateMerchandiseType);
   router.delete('/merchandise-type/:id', merchandiseTypeController.deleteMerchandiseType);
+
+  //booking 
+  router.post('/booking', bookingController.createBooking);
+  router.get('/booking', bookingController.getAllbookings);
+  router.get('/booking:id', bookingController.getBooking);
+  router.delete('/booking/:id', bookingController.deleteBooking);
 
   return app.use("/api", router);
 };
