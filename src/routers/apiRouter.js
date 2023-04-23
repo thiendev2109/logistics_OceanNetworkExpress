@@ -29,7 +29,7 @@ const initialApiRouter = (app) => {
   router.post('customer-login' ,middleware.verifyTokenAndAdmin, authCustomerController.loginCustomer);
   //customer
   router.post('/customer', authCustomerController.createCustomer);
-  router.get('/customer',  middleware.verifyTokenAndAdmin,customerController.getAllCustomers);
+  router.get('/customer',  customerController.getAllCustomers);
   router.get('/customer:id', middleware.verifyTokenAndAdmin,  customerController.getCustomer);
   router.put('/customer/:id', middleware.verifyTokenAndAdmin, customerController.updateCustomer);
   router.delete('/customer/:id', middleware.verifyTokenAndAdmin, customerController.deleteCustomer);
