@@ -11,6 +11,8 @@ import containerController from "../controllers/Api/containerController";
 import serviceController from "../controllers/Api/serviceController";
 import merchandiseTypeController from "../controllers/Api/merchandiseTypeController";
 import bookingController from "../controllers/Api/bookingController";
+import paymentController from "../controllers/Api/paymentController";
+import shippingController from "../controllers/Api/shippingController"
 //middleware
 import middleware from "../middlewares/middleware";
 
@@ -101,6 +103,21 @@ const initialApiRouter = (app) => {
   router.put('/booking-to-status/:id', bookingController.bookingToStatus);
   router.post('booking-to-shipping', bookingController.bookingToShipping);
   router.post('booking-to-payment', bookingController.bookingToPayment);
+
+  //payment
+  //merchandiseType
+  router.post('/payment', paymentController.createPayment);
+  router.get('/payment', paymentController.getAllPayments);
+  router.get('/payment:id', paymentController.getPayment);
+  router.put('/payment/:id', paymentController.updatePayment);
+  router.delete('/payment/:id', paymentController.deletePayment);
+
+   //merchandiseType
+   router.post('/shipping', shippingController.createMerchandiseType);
+   router.get('/shipping', shippingController.getAllMerchandiseTypes);
+   router.get('/shipping:id', shippingController.getMerchandiseType);
+   router.put('/shipping/:id', shippingController.updateMerchandiseType);
+   router.delete('/shipping/:id', shippingController.deleteMerchandiseType);
 
   return app.use("/api", router);
 };
