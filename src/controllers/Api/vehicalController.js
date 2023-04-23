@@ -2,12 +2,11 @@ import db from "../../models/index";
 
 const vehicalController = {
   createVehical: async (req, res) => {
-    const { id_vehical, licensePlate, vehicalLocation, id_warehouse } =
-      req.body;
+    const { licensePlate, type, vehicalLocation, id_warehouse } = req.body;
 
     await db.Vehicals.create({
-      id_vehical,
       licensePlate,
+      type,
       vehicalLocation,
       id_warehouse,
     })

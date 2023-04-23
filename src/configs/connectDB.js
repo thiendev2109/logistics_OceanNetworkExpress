@@ -1,59 +1,41 @@
 import Sequelize from "sequelize";
 
-
 // Cấu hình kết nối tới server 1
-const logistics_VN = new Sequelize('Logi_OceanNetworkExpress', 'sa', '12345', {
-  host: 'SITHIEN',
-  dialect: 'mssql',
+const logistics_ONE = new Sequelize("Logi_OceanNetworkExpress", "sa", "12345", {
+  host: "SITHIEN",
+  dialect: "mssql",
 });
 
-// Cấu hình kết nối tới server 2
-const logistics_SG = new Sequelize('Logi_OceanNetworkExpress', 'sa', '12345', {
-  host: 'SITHIEN',
-  dialect: 'mssql',
-  port : 1434
-});
-
-// Cấu hình kết nối tới server 3
-const logistics_KR = new Sequelize('Logi_OceanNetworkExpress', 'sa', '12345', {
-  host: 'SITHIEN',
-  dialect: 'mssql',
-  port : 1435
-});
-
-
-let connectDB = async () =>{
-  try { 
-      // Kiểm tra kết nối tới từng server SQL
-      logistics_VN
+let connectDB = async (app) => {
+  try {
+    // Kiểm tra kết nối tới từng server SQL
+    logistics_ONE
       .authenticate()
       .then(() => {
-        console.log('Connect to ONE VIETNAM success');
+        console.log("Connect to ONE VIETNAM success");
       })
-      .catch(err => {
-        console.error('Unable to connect to ONE VIETNAM : ', err);
+      .catch((err) => {
+        console.error("Unable to connect to ONE VIETNAM : ", err);
       });
-
-      // logistics_SG
-      // .authenticate()
-      // .then(() => {
-      //   console.log('Connect to ONE SINGAPORE success');
-      // })
-      // .catch(err => {
-      //   console.error('Unable to connect to ONE SINGAPORE : ', err);
-      // });
-
-      // logistics_KR
-      // .authenticate() 
-      // .then(() => {
-      //   console.log('Connect to ONE KOREA success');
-      // })
-      // .catch(err => {
-      //   console.error('Unable to connect to ONE KOREA : ', err);
-      // });
-    } catch (error) {
-      console.error('Unable to connect to the database:', error);
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
   }
-}
 
-export default {connectDB, logistics_VN};
+  app.post("/api/change-port", (req, res) => {
+    const newPort = req.body.port;
+    logistics_ONE.config.port = newPort;
+    logistics_ONE
+      .close()
+      .then(() => logistics_ONE.authenticate())
+      .then(() => {
+        console.log("Connection has been established successfully.");
+        res.sendStatus(200);
+      })
+      .catch((err) => {
+        console.error("Unable to connect to the database:", err);
+        res.sendStatus(500);
+      });
+  });
+};
+
+export default { connectDB };

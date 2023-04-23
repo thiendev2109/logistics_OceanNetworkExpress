@@ -133,7 +133,7 @@ const employeeController = {
 
   deleteEmployee: async (req, res) => {
     try {
-      await db.Employees.destroy({ where: { id_customer: req.params.id } })
+      await db.Employees.destroy({ where: { id_employee: req.params.id } })
         .then((result) => {
           if (!result) {
             return res

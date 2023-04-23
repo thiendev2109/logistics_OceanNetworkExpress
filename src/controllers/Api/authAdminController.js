@@ -15,7 +15,7 @@ const authAdminController = {
       warehouse: admin.id_warehouse ?? null,
     };
     const options = {
-      expiresIn: "1h",
+      expiresIn: "1d",
     };
     return jwt.sign(payload, process.env.JWT_SERECTKEY, options);
   },
@@ -165,11 +165,10 @@ const authAdminController = {
   },
 
   logoutAdmin: async (req, res) => {
-    res.clearCookie("refreshToken");
     refreshTokens = refreshTokens.filter(
       (token) => token !== req.cookies.refreshToken
     );
-
+    res.clearCookie("refreshToken");
     return res.status(200).json({ status: "OK", msg: "Logout success" });
   },
 };

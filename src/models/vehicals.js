@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         defaultValue: UUIDV4,
       },
+      type: DataTypes.INTEGER,
       licensePlate: DataTypes.STRING,
       vehicalLocation: DataTypes.STRING,
       id_warehouse: DataTypes.STRING,

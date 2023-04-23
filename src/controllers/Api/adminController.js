@@ -34,7 +34,7 @@ const adminController = {
   updateAdmin: async (req, res) => {
     const id = req.params.id;
     try {
-      await db.Admin.update(req.body)
+      await db.Admin.update(req.body, { where: { id_admin: id } })
         .then((result) => {
           if (!result) {
             return res

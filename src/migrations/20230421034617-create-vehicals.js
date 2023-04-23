@@ -8,6 +8,7 @@ module.exports = {
         type: Sequelize.UUID,
       },
       licensePlate: { allowNull: false, type: Sequelize.STRING },
+      type: { allowNull: false, type: Sequelize.INTEGER },
       vehicalLocation: { allowNull: false, type: Sequelize.STRING },
       id_warehouse: { allowNull: false, type: Sequelize.STRING },
       createdAt: {

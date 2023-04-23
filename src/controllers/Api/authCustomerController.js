@@ -14,7 +14,7 @@ const authCustomerController = {
       phone: customer.phone,
     };
     const options = {
-      expiresIn: "1h",
+      expiresIn: "1d",
     };
     return jwt.sign(payload, process.env.JWT_SERECTKEY, options);
   },
