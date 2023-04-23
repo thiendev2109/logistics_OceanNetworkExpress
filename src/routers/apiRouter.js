@@ -113,11 +113,11 @@ const initialApiRouter = (app) => {
   router.delete('/payment/:id', paymentController.deletePayment);
 
    //merchandiseType
-   router.post('/shipping', shippingController.createMerchandiseType);
-   router.get('/shipping', shippingController.getAllMerchandiseTypes);
-   router.get('/shipping:id', shippingController.getMerchandiseType);
-   router.put('/shipping/:id', shippingController.updateMerchandiseType);
-   router.delete('/shipping/:id', shippingController.deleteMerchandiseType);
+   router.post('/shipping', shippingController.createShipping);
+   router.get('/shipping', shippingController.getAllShippings);
+   router.get('/shipping:id', shippingController.getShipping);
+   router.put('/shipping/:id', shippingController.updateShipping);
+   router.delete('/shipping/:id', shippingController.deleteShipping);
 
   return app.use("/api", router);
 };
