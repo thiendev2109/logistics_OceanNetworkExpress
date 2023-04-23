@@ -94,6 +94,7 @@ const initialApiRouter = (app) => {
   router.post('/booking', bookingController.createBooking);
   router.get('/booking', bookingController.getAllbookings);
   router.get('/booking:id', bookingController.getBooking);
+  router.put('/booking/:id', bookingController.updateBooking);
   router.delete('/booking/:id', bookingController.deleteBooking);
 
   return app.use("/api", router);
