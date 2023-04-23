@@ -4,6 +4,7 @@ import "dotenv/config";
 import cookieParser from "cookie-parser";
 import connection from "./configs/connectDB";
 import initialApiRouter from "./routers/apiRouter";
+import initialWebRouter from "./routers/webRouter";
 import cors from "cors";
 
 // import initialWebRouter from './routers/webRouter'
@@ -35,7 +36,7 @@ configViewEngine(app);
 
 connection.connectDB();
 initialApiRouter(app);
-// initialWebRouter(app);
+initialWebRouter(app);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

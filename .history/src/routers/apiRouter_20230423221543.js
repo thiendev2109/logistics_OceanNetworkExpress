@@ -23,8 +23,8 @@ const initialApiRouter = (app) => {
   router.post('/admin-refresh', authAdminController.requestRefreshToken)
   // admin
   router.get("/admin", middleware.verifyTokenAndAdmin, adminController.getAllAdmin);
-  router.put("/admin/:id",middleware.verifyTokenAndAdmin,adminController.updateAdmin);
-  router.delete("/admin/:id",middleware.verifyTokenAndAdmin,adminController.deleteAdmin);
+  router.put("/admin:id",middleware.verifyTokenAndAdmin,adminController.updateAdmin);
+  router.delete("/admin:id",middleware.verifyTokenAndAdmin,adminController.deleteAdmin);
 
 
   //customer auth
@@ -38,18 +38,18 @@ const initialApiRouter = (app) => {
   
   //employee-type
   router.post('/employee-type',middleware.verifyTokenAndAdmin, employeeTypeCotroller.createEmployeeType);
-  router.get('/employee-type', employeeTypeCotroller.getAllEmployeeType);
+  router.get('/employee-type', customerController.getAllCustomers);
   router.get('/employee-type:id', employeeTypeCotroller.getEmployeeType);
-  router.put('/employee-type/:id',middleware.verifyTokenAndAdmin, employeeTypeCotroller.updateEmployeeType);
-  router.delete('/employee-type/:id',middleware.verifyTokenAndAdmin, employeeTypeCotroller.deleteEmployeeType);
+  router.put('/employee-type:id',middleware.verifyTokenAndAdmin, employeeTypeCotroller.updateEmployeeType);
+  router.delete('/employee-type:id',middleware.verifyTokenAndAdmin, employeeTypeCotroller.deleteEmployeeType);
 
 
   //employees
-  router.post('/employee',middleware.verifyTokenAndAdmin, employeeController.createEmployee);
-  router.get('/employee',middleware.verifyTokenAndAdmin, employeeController.getAllEmployees);
+  router.post('/employee', employeeController.createEmployee);
+  router.get('/employee', employeeController.getAllEmployees);
   router.get('/employee:id', employeeController.getEmployee);
-  router.put('/employee/:id',middleware.verifyTokenAndAdmin, employeeController.updateEmployee);
-  router.delete('/employee/:id',middleware.verifyTokenAndAdmin, employeeController.deleteEmployee);
+  router.put('/employee:id', employeeController.updateEmployee);
+  router.delete('/employee:id', employeeController.deleteEmployee);
 
 
   //warehouse
@@ -57,23 +57,23 @@ const initialApiRouter = (app) => {
   //warehouse router
   router.get('/warehouse', middleware.verifyTokenAndAdmin, warehouseController.getAllWarehouses);
   router.get('/warehouse:id', warehouseController.getWarehouse);
-  router.put('/warehouse/:id', middleware.verifyTokenAndAdmin, warehouseController.updateWarehouse);
-  router.delete('/warehouse/:id', middleware.verifyTokenAndAdmin, warehouseController.deleteWarehouse);
+  router.put('/warehouse:id', middleware.verifyTokenAndAdmin, warehouseController.updateWarehouse);
+  router.delete('/warehouse:id', middleware.verifyTokenAndAdmin, warehouseController.deleteWarehouse);
   router.post("/warehouse", middleware.verifyTokenAndAdmin , warehouseController.createWarehouse);
 
   //vehical 
-  router.post('/vehical', middleware.verifyTokenAndAdmin, vehicalController.createVehical);
-  router.get('/vehical', middleware.verifyTokenAndAdmin, vehicalController.getAllVehicals);
+  router.post('/vehical', vehicalController.createVehical);
+  router.get('/vehical', vehicalController.getAllVehicals);
   router.get('/vehical:id', vehicalController.getVehical);
-  router.put('/vehical/:id', middleware.verifyTokenAndAdmin, vehicalController.updateVehical);
-  router.delete('/vehical/:id', middleware.verifyTokenAndAdmin, vehicalController.deleteVehical);
+  router.put('/vehical:id', vehicalController.updateVehical);
+  router.delete('/vehical:id', vehicalController.deleteVehical);
 
   //container
   router.post('/container', containerController.createContainer);
   router.get('/container', containerController.getAllContainers);
   router.get('/container:id', containerController.getContainer);
-  router.put('/container/:id', containerController.updateContainer);
-  router.delete('/container/:id', containerController.deleteContainer);
+  router.put('/container:id', containerController.updateContainer);
+  router.delete('/container:id', containerController.deleteContainer);
 
   //service
   router.post('/service', serviceController.createService);
