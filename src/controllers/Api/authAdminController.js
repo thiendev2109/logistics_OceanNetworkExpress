@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import db from "../../models/index";
 
-let refreshToken = [];
+let refreshTokens = [];
 
 const authAdminController = {
   generateToken: async (admin) => {
@@ -18,6 +18,21 @@ const authAdminController = {
       expiresIn: "1h",
     };
     return jwt.sign(payload, process.env.JWT_SERECTKEY, options);
+  },
+
+  generateRefreshToken: async (admin) => {
+    const payload = {
+      id: admin.id_admin,
+      name: admin.adminName,
+      email: admin.email,
+      phone: admin.phone,
+      adminSystem: admin.adminSystem,
+      warehouse: admin.id_warehouse ?? null,
+    };
+    const options = {
+      expiresIn: "365d",
+    };
+    return jwt.sign(payload, process.env.JWT_REFRESH_SERECTKEY, options);
   },
 
   createAdmin: async (req, res) => {
@@ -78,6 +93,16 @@ const authAdminController = {
           }
 
           const token = await authAdminController.generateToken(result);
+          const refreshToken = await authAdminController.generateRefreshToken(
+            result
+          );
+          refreshTokens.push(refreshToken);
+          res.cookie("refreshToken", refreshToken, {
+            httpOnly: true,
+            secure: false,
+            path: "/",
+            sameSite: "strict",
+          });
           delete result.dataValues["password"]; // xóa element password trong json result để trả về kết quả k có password, =>  đảm bảo sự bảo mật
           return res.status(200).json({
             status: "OK",
@@ -97,6 +122,55 @@ const authAdminController = {
         msg: error.message,
       });
     }
+  },
+
+  requestRefreshToken: async (req, res) => {
+    // yêu cầu user refresh token
+    const refreshToken = req.cookies.refreshToken;
+    if (!refreshToken) {
+      return res
+        .status(401)
+        .json({ status: "ERR", msg: "You are not authenticated" });
+    }
+
+    if (!refreshTokens.includes(refreshToken)) {
+      return res
+        .status(403)
+        .json({ status: "ERR", msg: "Refresh token is not valid" });
+    }
+    //prettier-ignore
+    jwt.verify(
+      refreshToken,
+      process.env.JWT_REFRESH_SERECTKEY,
+      async (err, admin) => {
+        if (err) {
+          console.log(err);
+        }
+        console.log('abc');
+        console.log(admin);
+
+        refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
+        const newAccessToken = await authAdminController.generateToken(admin);
+        const newRefreshToken = await authAdminController.generateRefreshToken(admin);
+        refreshTokens.push(newRefreshToken);
+        res.cookie("refreshToken", newRefreshToken, {
+          httpOnly: true,
+          secure: false,
+          path: "/",
+          sameSite: "strict",
+        });
+        return res.status(200).json({ status: "OK", token: newAccessToken, refreshToken : newRefreshToken });
+      }
+    );
+  },
+
+  logoutAdmin: async (req, res) => {
+    res.clearCookie("refreshToken");
+    refreshTokens = refreshTokens.filter(
+      (token) => token !== req.cookies.refreshToken
+    );
+
+    return res.status(200).json({ status: "OK", msg: "Logout success" });
   },
 };
 

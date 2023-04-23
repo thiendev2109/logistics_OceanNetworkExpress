@@ -16,7 +16,9 @@ let router = express.Router();
 const initialApiRouter = (app) => {
   //admin auth
   router.post("/admin",middleware.verifyTokenAndAdmin,authAdminController.createAdmin);
-  router.post("/admin-lg", authAdminController.loginAdmin);
+  router.post("/admin-login", authAdminController.loginAdmin);
+  router.post("/admin-logout",middleware.verifyToken, authAdminController.logoutAdmin);
+  router.post('/admin-refresh', authAdminController.requestRefreshToken)
   // admin
   router.get("/admin", middleware.verifyTokenAndAdmin, adminController.getAllAdmin);
   router.put("/admin:id",middleware.verifyTokenAndAdmin,adminController.updateAdmin);
@@ -24,20 +26,20 @@ const initialApiRouter = (app) => {
 
 
   //customer auth
-  router.post('customer-lg', authCustomerController.loginCustomer);
+  router.post('customer-login' ,middleware.verifyTokenAndAdmin, authCustomerController.loginCustomer);
   //customer
   router.post('/customer', authCustomerController.createCustomer);
-  router.get('/customer', customerController.getAllCustomers);
+  router.get('/customer',  middleware.verifyTokenAndAdmin,customerController.getAllCustomers);
   router.get('/customer:id', middleware.verifyTokenAndAdmin,  customerController.getCustomer);
-  router.put('/customer:id', middleware.verifyTokenAndAdmin, customerController.updateCustomer);
-  router.delete('/customer:id', middleware.verifyTokenAndAdmin, customerController.deleteCustomer);
+  router.put('/customer/:id', middleware.verifyTokenAndAdmin, customerController.updateCustomer);
+  router.delete('/customer/:id', middleware.verifyTokenAndAdmin, customerController.deleteCustomer);
   
   //employee-type
-  router.post('/employee-type', employeeTypeCotroller.createEmployeeType);
+  router.post('/employee-type',middleware.verifyTokenAndAdmin, employeeTypeCotroller.createEmployeeType);
   router.get('/employee-type', customerController.getAllCustomers);
   router.get('/employee-type:id', employeeTypeCotroller.getEmployeeType);
-  router.put('/employee-type:id', employeeTypeCotroller.updateEmployeeType);
-  router.delete('/employee-type:id', employeeTypeCotroller.deleteEmployeeType);
+  router.put('/employee-type:id',middleware.verifyTokenAndAdmin, employeeTypeCotroller.updateEmployeeType);
+  router.delete('/employee-type:id',middleware.verifyTokenAndAdmin, employeeTypeCotroller.deleteEmployeeType);
 
 
   //employees

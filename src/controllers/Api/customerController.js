@@ -62,7 +62,7 @@ const customerController = {
   updateCustomer: async (req, res) => {
     const id = req.params.id;
     try {
-      await db.Customer.update(req.body)
+      await db.Customer.update(req.body, { where: { id_customer: id } })
         .then((result) => {
           if (!result) {
             return res
