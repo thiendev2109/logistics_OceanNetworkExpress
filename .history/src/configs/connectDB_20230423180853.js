@@ -15,7 +15,7 @@ const logistics_SG = new Sequelize('Logi_OceanNetworkExpress', 'sa', '1234', {
 });
 
 // Cấu hình kết nối tới server 3
-const logistics_KR = new Sequelize('Logi_OceanNetworkExpress', 'sa', '1234', {
+const logistics_KR = new Sequelize('Logi_OceanNetworkExpress', 'sa', '12345', {
   host: 'DESKTOP-OJJ1N40',
   dialect: 'mssql',
   port : 1435
