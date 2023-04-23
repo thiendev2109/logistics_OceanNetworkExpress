@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: UUIDV4,
       },
       serviceName: DataTypes.STRING,
-      price: DataTypes.DOUBLE,
+      servicePrice: DataTypes.DOUBLE,
     },
     {
       sequelize,

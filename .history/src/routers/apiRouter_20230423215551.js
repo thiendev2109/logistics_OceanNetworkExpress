@@ -8,8 +8,6 @@ import employeeTypeCotroller from "../controllers/Api/employeeTypeController";
 import employeeController from "../controllers/Api/employeeController";
 import vehicalController from "../controllers/Api/vehicalController";
 import containerController from "../controllers/Api/containerController";
-import serviceController from "../controllers/Api/serviceController";
-import merchandiseTypeController from "../controllers/Api/merchandiseTypeController";
 //middleware
 import middleware from "../middlewares/middleware";
 
@@ -81,13 +79,6 @@ const initialApiRouter = (app) => {
   router.get('/service:id', serviceController.getService);
   router.put('/service/:id', serviceController.updateService);
   router.delete('/service/:id', serviceController.deleteService);
-
-  //merchandiseType
-  router.post('/merchandise-type', merchandiseTypeController.createMerchandiseType);
-  router.get('/merchandise-type', merchandiseTypeController.getAllMerchandiseTypes);
-  router.get('/merchandise-type:id', merchandiseTypeController.getMerchandiseType);
-  router.put('/merchandise-type/:id', merchandiseTypeController.updateMerchandiseType);
-  router.delete('/merchandise-type/:id', merchandiseTypeController.deleteMerchandiseType);
 
   return app.use("/api", router);
 };

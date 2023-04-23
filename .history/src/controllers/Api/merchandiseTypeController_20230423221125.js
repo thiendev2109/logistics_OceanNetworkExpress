@@ -109,7 +109,7 @@ const merchandiseTypeController = {
     }
   },
 
-  deleteMerchandiseType: async (req, res) => {
+  deleteVehical: async (req, res) => {
     try {
       await db.MerchandiseType.destroy({ where: { id_merchandiseType: req.params.id } })
         .then((result) => {
